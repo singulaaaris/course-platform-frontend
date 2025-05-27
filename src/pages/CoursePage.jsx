@@ -15,7 +15,7 @@ import "../style/CoursePage.css";
 const CoursePage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { user } = useAuth(); // токен уже будет в интерцепторе
+  const { user } = useAuth(); 
   const course = useSelector(selectCourse);
   const loading = useSelector(selectCourseLoading);
   const error = useSelector(selectCourseError);
@@ -26,13 +26,17 @@ const CoursePage = () => {
   }, [id, dispatch]);
 
   const handleCommentSubmit = async (content) => {
-    try {
-      await axios.post(`/comments/${course.id}`, { content });
-      dispatch(fetchCourseById(course.id));
-    } catch (err) {
-      console.error("Failed to post comment:", err);
-    }
-  };
+  try {
+    await axios.post(`/comments/${course.id}`, content, {
+      headers: {
+        "Content-Type": "text/plain",
+      },
+    });
+    dispatch(fetchCourseById(course.id));
+  } catch (err) {
+    console.error("Failed to post comment:", err);
+  }
+};
 
   const handleLike = async () => {
     try {
@@ -40,7 +44,7 @@ const CoursePage = () => {
       dispatch(fetchCourseById(id));
     } catch (err) {
       console.error("Failed to like:", err);
-      setMessage("❌ You must be logged in to like.");
+      setMessage(" You must be logged in to like.");
     }
   };
 
@@ -48,11 +52,11 @@ const CoursePage = () => {
     try {
       await axios.post(`/courses/${id}/rate?value=${value}`);
       dispatch(fetchCourseById(id));
-      setMessage(`✅ You rated ${value} ★`);
+      setMessage(` You rated ${value} ★`);
       setTimeout(() => setMessage(""), 3000);
     } catch (err) {
       console.error("Failed to rate:", err);
-      setMessage("❌ You must be logged in to rate.");
+      setMessage("You must be logged in to rate.");
     }
   };
 
@@ -60,11 +64,11 @@ const CoursePage = () => {
     try {
       await axios.post(`/courses/${id}/enroll`);
       dispatch(fetchCourseById(id));
-      setMessage("✅ You've enrolled in this course!");
+      setMessage("You've enrolled in this course!");
       setTimeout(() => setMessage(""), 3000);
     } catch (err) {
       console.error("Failed to enroll:", err);
-      setMessage("❌ You must be logged in to enroll.");
+      setMessage(" You must be logged in to enroll.");
     }
   };
 

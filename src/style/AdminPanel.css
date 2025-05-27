@@ -1,0 +1,124 @@
+.admin-panel {
+  width: 90%;
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 28px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+  font-family: "M PLUS 1p", sans-serif;
+  text-align: center;
+}
+
+.admin-panel h2 {
+  font-size: 26px;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 28px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fafafa;
+  border-radius: 16px;
+  overflow: hidden;
+  text-align: center;
+}
+
+th {
+  background: #f2f2f2;
+  padding: 14px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #888;
+}
+
+td {
+  padding: 16px;
+  font-size: 15px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+tr:hover {
+  background-color: #f8faff;
+  transition: 0.2s ease;
+}
+
+td:nth-child(2) {
+  font-weight: 500;
+  color: #444;
+}
+
+select {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-weight: 500;
+  background: #f9f9f9;
+  transition: 0.2s ease;
+}
+
+select[value="ADMIN"] {
+  color: #e91e63;
+  font-weight: bold;
+}
+
+select[value="USER"] {
+  color: #1e88e5;
+}
+
+button {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  background-color: white;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: #f3f3f3;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.03);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+
+@media (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  tr {
+    margin-bottom: 16px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background: #fff;
+  }
+
+  th {
+    display: none;
+  }
+
+  td {
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+  }
+
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 16px;
+    font-weight: bold;
+    color: #888;
+  }
+}

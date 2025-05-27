@@ -3,23 +3,28 @@ import React, { createContext, useContext, useState } from "react";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState(() => {
+  const [user, setUser] = useState(() => {
     const data = localStorage.getItem("user");
     return data ? JSON.parse(data) : null;
   });
 
-  const login = (userData) => {
-    setAuth(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
+  const login = (authResponse) => {
+    const fullUser = {
+      ...authResponse.user,
+      token: authResponse.token
+    };
+
+    setUser(fullUser);
+    localStorage.setItem("user", JSON.stringify(fullUser));
   };
 
   const logout = () => {
-    setAuth(null);
+    setUser(null);
     localStorage.removeItem("user");
   };
 
   return (
-    <AuthContext.Provider value={{ user: auth?.user, token: auth?.token, login, logout }}>
+    <AuthContext.Provider value={{ user, token: user?.token, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

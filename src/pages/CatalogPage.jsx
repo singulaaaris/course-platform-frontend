@@ -43,7 +43,7 @@ const CatalogPage = () => {
     }
   };
 
-  // ✅ useMemo для оптимизации сортировки по лайкам
+
   const visibleCourses = useMemo(() => {
     if (sort === "likes") {
       return [...courses].sort((a, b) => b.likesCount - a.likesCount);

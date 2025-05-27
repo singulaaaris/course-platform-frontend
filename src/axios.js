@@ -10,7 +10,7 @@ const instance = axios.create({
 instance.interceptors.request.use((config) => {
   try {
     const auth = JSON.parse(localStorage.getItem("user"));
-    const token = auth?.token || auth?.user?.token; // учитываем обе структуры
+    const token = auth?.token || auth?.user?.token; 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

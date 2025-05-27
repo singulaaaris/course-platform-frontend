@@ -42,7 +42,7 @@ const DashboardPage = () => {
 
   const fetchCreatedCourses = async () => {
     try {
-      const res = await axios.get("/courses/me/created-courses"); // ✅ исправлен маршрут
+      const res = await axios.get("/courses/me/created-courses");
       setMyCreatedCourses(res.data);
     } catch (error) {
       console.error("Ошибка загрузки созданных курсов:", error);
@@ -56,10 +56,10 @@ const DashboardPage = () => {
 
       const res = await axios.put("/users/me", updateData);
       login({ user: res.data, token });
-      setStatus("✅ Профиль обновлён!");
+      setStatus(" Профиль обновлён!");
     } catch (error) {
       console.error("Ошибка обновления профиля:", error);
-      setStatus("❌ Ошибка при обновлении профиля");
+      setStatus(" Ошибка при обновлении профиля");
     }
   };
 
@@ -80,12 +80,12 @@ const DashboardPage = () => {
         description: "",
         imageUrl: "",
         categoryId: ""
-      });
-      setStatus("✅ Курс создан!");
+      })
+      setStatus(" Курс создан!");
       fetchCreatedCourses();
     } catch (error) {
       console.error("Ошибка при создании курса:", error);
-      setStatus("❌ Не удалось создать курс");
+      setStatus("Не удалось создать курс");
     }
   };
 
@@ -93,10 +93,10 @@ const DashboardPage = () => {
     try {
       await axios.delete(`/courses/${courseId}`);
       setMyCreatedCourses(prev => prev.filter(c => c.id !== courseId));
-      setStatus("🗑 Курс удалён");
+      setStatus(" Курс удалён");
     } catch (error) {
       console.error("Ошибка удаления курса:", error);
-      setStatus("❌ Не удалось удалить курс");
+      setStatus(" Не удалось удалить курс");
     }
   };
 
@@ -143,7 +143,7 @@ const DashboardPage = () => {
       </div>
 
       <div className="create-course-form">
-        <h3>📘 Create New Course</h3>
+        <h3>Create New Course</h3>
         <input
           type="text"
           placeholder="Title"
@@ -171,7 +171,7 @@ const DashboardPage = () => {
       </div>
 
       <div className="dashboard-courses">
-        <h3>📚 Courses You Created</h3>
+        <h3>Courses You Created</h3>
         {myCreatedCourses.length === 0 ? (
           <p>You haven’t created any courses yet.</p>
         ) : (

@@ -9,8 +9,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* --- всё ниже уже относится к .App, не внутри code --- */
-
 .App {
   text-align: center;
 }

@@ -6,23 +6,25 @@ import { ThemeContext } from "./context/ThemeContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-// Pages
 import HomePage from "./pages/HomePage";
 import CatalogPage from "./pages/CatalogPage";
 import CoursePage from "./pages/CoursePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
+import AdminPanel from "./pages/AdminPanel";
 import NotFoundPage from "./pages/NotFoundPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage"; 
 
 const App = () => {
   const { user } = useAuth();
   const { darkMode } = useContext(ThemeContext);
   const location = useLocation();
 
-  // На этих страницах нужно скрыть Header/Footer
-  const hideLayoutRoutes = ["/login", "/register"];
+  const hideLayoutRoutes = ["/login", "/register", "/forgot-password"];
   const hideLayout = hideLayoutRoutes.includes(location.pathname);
+
+  const isAdmin = user?.role === "ADMIN";
 
   return (
     <div className={`app ${darkMode ? "dark" : "light"}`}>
@@ -33,21 +35,39 @@ const App = () => {
         <Route path="/catalog" element={<CatalogPage />} />
         <Route path="/catalog/:id" element={<CoursePage />} />
 
-        {/* Публичные страницы — если уже залогинен, редирект */}
         <Route
           path="/login"
-          element={user ? <Navigate to="/dashboard" /> : <LoginPage />}
-        />
-        <Route
-          path="/register"
-          element={user ? <Navigate to="/dashboard" /> : <RegisterPage />}
+          element={
+            user ? (
+              isAdmin ? <Navigate to="/admin" /> : <Navigate to="/dashboard" />
+            ) : (
+              <LoginPage />
+            )
+          }
         />
 
-        {/* Приватная страница — если не залогинен, редирект */}
+        <Route
+          path="/register"
+          element={
+            user ? (
+              isAdmin ? <Navigate to="/admin" /> : <Navigate to="/dashboard" />
+            ) : (
+              <RegisterPage />
+            )
+          }
+        />
+
         <Route
           path="/dashboard"
           element={user ? <DashboardPage /> : <Navigate to="/login" />}
         />
+
+        <Route
+          path="/admin"
+          element={isAdmin ? <AdminPanel /> : <Navigate to="/" />}
+        />
+
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

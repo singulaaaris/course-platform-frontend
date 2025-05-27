@@ -11,7 +11,6 @@ export const fetchCourses = createAsyncThunk(
     params.append("page", page);
     params.append("size", 6);
 
-    // Сортировка по ID (новизна) или title (по умолчанию)
     if (sort === "id") {
       params.append("sortBy", "id");
       params.append("direction", "desc");
@@ -32,7 +31,6 @@ export const fetchCourses = createAsyncThunk(
 
     let courses = response.data.content;
 
-    // Фронтовая сортировка по лайкам (от большего к меньшему)
     if (sort === "likes") {
       courses = [...courses].sort((a, b) => b.likesCount - a.likesCount);
     }
