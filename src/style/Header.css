@@ -1,0 +1,76 @@
+.header {
+  background: #FFFEFC;
+  padding: 16px 0;
+  border-bottom: none;
+}
+
+.header-container {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  height: 43px;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-links a {
+  color: #111;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 17px;
+  font-family: "M PLUS 1p", sans-serif;
+}
+
+.nav-links a.active {
+  color: #C4297B;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.language {
+  font-size: 16px;
+  color: #111;
+  cursor: pointer;
+  font-family: "M PLUS 1p", sans-serif;
+}
+
+.theme-toggle {
+  width: 20px;
+  height: 20px;
+  background-color: #C4297B;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.login-btn {
+  background-color: #9C2476;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "M PLUS 1p", sans-serif;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  opacity: 0.9;
+}

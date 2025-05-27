@@ -1,0 +1,101 @@
+.best-categories-section {
+  max-width: 1100px;
+  margin: 1px auto 70px;
+  padding: 0 20px;
+  font-family: "M PLUS 1p", sans-serif;
+   background-color: white !important;
+
+}
+
+.best-categories-section h2 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: #555;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 35px;
+}
+
+.category-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 27px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  text-align: left;
+  transition: transform 0.2s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+}
+
+.category-tags {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.tag {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  color: white;
+  text-transform: lowercase;
+}
+
+.tag-count {
+  background: black;
+  color: white;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+
+.tag-pink { background-color: #C4297B; }
+.tag-purple { background-color: #87199b; }
+.tag-purple-dark { background-color: #6B2195; }
+.tag-indigo { background-color: #2c3d9b; }
+.tag-blue { background-color: #075797; }
+.tag-red { background-color: #480052; }
+.tag-gray { background-color: #ee7676; }
+
+.category-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+h1{
+font-size: 40px;
+}
+
+.view-more-btn {
+  margin: 40px auto 0;
+  display: block;
+  background: black;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.view-more-btn:hover {
+  opacity: 0.9;
+}
