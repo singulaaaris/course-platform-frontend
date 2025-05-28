@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../axios";
 import { useAuth } from "../context/AuthContext";
+import { useTranslation } from "react-i18next";
 import "../style/DashboardPage.css";
 
 const DashboardPage = () => {
   const { user, token, login, logout } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [name, setName] = useState(user?.name || "");
   const [avatarUrl, setAvatarUrl] = useState(user?.avatarUrl || "");
@@ -56,10 +58,10 @@ const DashboardPage = () => {
 
       const res = await axios.put("/users/me", updateData);
       login({ user: res.data, token });
-      setStatus(" Профиль обновлён!");
+      setStatus(t("dashboard_update_success"));
     } catch (error) {
       console.error("Ошибка обновления профиля:", error);
-      setStatus(" Ошибка при обновлении профиля");
+      setStatus(t("dashboard_update_error"));
     }
   };
 
@@ -80,12 +82,12 @@ const DashboardPage = () => {
         description: "",
         imageUrl: "",
         categoryId: ""
-      })
-      setStatus(" Курс создан!");
+      });
+      setStatus(t("dashboard_course_created"));
       fetchCreatedCourses();
     } catch (error) {
       console.error("Ошибка при создании курса:", error);
-      setStatus("Не удалось создать курс");
+      setStatus(t("dashboard_course_create_error"));
     }
   };
 
@@ -93,87 +95,87 @@ const DashboardPage = () => {
     try {
       await axios.delete(`/courses/${courseId}`);
       setMyCreatedCourses(prev => prev.filter(c => c.id !== courseId));
-      setStatus(" Курс удалён");
+      setStatus(t("dashboard_course_deleted"));
     } catch (error) {
       console.error("Ошибка удаления курса:", error);
-      setStatus(" Не удалось удалить курс");
+      setStatus(t("dashboard_course_delete_error"));
     }
   };
 
-  if (!user) return <p>Вы не вошли в систему</p>;
+  if (!user) return <p>{t("dashboard_not_logged_in")}</p>;
 
   return (
     <div className="dashboard">
-      <h2>Welcome, {user.name || "User"} !</h2>
+      <h2>{t("dashboard_welcome")}, {user.name || t("dashboard_user")}!</h2>
 
       <div className="dashboard-info">
         {avatarUrl ? (
           <img src={avatarUrl} alt="Avatar" className="avatar" />
         ) : (
-          <div className="avatar placeholder">No Avatar</div>
+          <div className="avatar placeholder">{t("dashboard_no_avatar")}</div>
         )}
 
         <div className="form-section">
           <input
             type="text"
-            placeholder="Your name"
+            placeholder={t("dashboard_placeholder_name")}
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
           <input
             type="text"
-            placeholder="Avatar URL"
+            placeholder={t("dashboard_placeholder_avatar")}
             value={avatarUrl}
             onChange={(e) => setAvatarUrl(e.target.value)}
           />
           <input
             type="password"
-            placeholder="New Password (optional)"
+            placeholder={t("dashboard_placeholder_password")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button onClick={handleUpdate}>Save Changes</button>
+          <button onClick={handleUpdate}>{t("dashboard_save")}</button>
           {status && <p className="status-msg">{status}</p>}
         </div>
       </div>
 
       <div className="dashboard-actions">
-        <button onClick={() => navigate("/catalog")}>Go to Catalog</button>
-        <button onClick={logout}>Logout</button>
+        <button onClick={() => navigate("/catalog")}>{t("dashboard_catalog")}</button>
+        <button onClick={logout}>{t("logout")}</button>
       </div>
 
       <div className="create-course-form">
-        <h3>Create New Course</h3>
+        <h3>{t("dashboard_create_title")}</h3>
         <input
           type="text"
-          placeholder="Title"
+          placeholder={t("dashboard_course_title")}
           value={newCourse.title}
           onChange={(e) => setNewCourse({ ...newCourse, title: e.target.value })}
         />
         <textarea
-          placeholder="Description"
+          placeholder={t("dashboard_course_description")}
           value={newCourse.description}
           onChange={(e) => setNewCourse({ ...newCourse, description: e.target.value })}
         />
         <input
           type="text"
-          placeholder="Image URL"
+          placeholder={t("dashboard_course_image")}
           value={newCourse.imageUrl}
           onChange={(e) => setNewCourse({ ...newCourse, imageUrl: e.target.value })}
         />
         <input
           type="number"
-          placeholder="Category ID"
+          placeholder={t("dashboard_course_category")}
           value={newCourse.categoryId}
           onChange={(e) => setNewCourse({ ...newCourse, categoryId: e.target.value })}
         />
-        <button onClick={handleCreateCourse}>Create Course</button>
+        <button onClick={handleCreateCourse}>{t("dashboard_create")}</button>
       </div>
 
       <div className="dashboard-courses">
-        <h3>Courses You Created</h3>
+        <h3>{t("dashboard_created_courses")}</h3>
         {myCreatedCourses.length === 0 ? (
-          <p>You haven’t created any courses yet.</p>
+          <p>{t("dashboard_no_created")}</p>
         ) : (
           <div className="dashboard-course-grid">
             {myCreatedCourses.map((course) => (
@@ -182,7 +184,7 @@ const DashboardPage = () => {
                 <p>{course.categoryName}</p>
                 <p>❤️ {course.likesCount} | ⭐ {course.averageRating.toFixed(1)}</p>
                 <button onClick={() => handleDeleteCourse(course.id)} className="delete-course-button">
-                  🗑 Delete
+                  🗑 {t("delete")}
                 </button>
               </div>
             ))}
@@ -191,9 +193,9 @@ const DashboardPage = () => {
       </div>
 
       <div className="dashboard-courses">
-        <h3>🎓 Courses You Are Enrolled In</h3>
+        <h3>{t("dashboard_enrolled")}</h3>
         {enrolledCourses.length === 0 ? (
-          <p>You are not enrolled in any courses.</p>
+          <p>{t("dashboard_no_enrolled")}</p>
         ) : (
           <div className="dashboard-course-grid">
             {enrolledCourses.map((course) => (
@@ -201,7 +203,7 @@ const DashboardPage = () => {
                 <h4>{course.title}</h4>
                 <p>{course.categoryName}</p>
                 <p>❤️ {course.likesCount} | ⭐ {course.averageRating.toFixed(1)}</p>
-                <a href={`/catalog/${course.id}`} className="view-course-button">View Course</a>
+                <a href={`/catalog/${course.id}`} className="view-course-button">{t("view_course")}</a>
               </div>
             ))}
           </div>

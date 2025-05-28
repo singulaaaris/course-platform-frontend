@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
+import { ThemeContext } from "../context/ThemeContext";
+import { LanguageContext } from "../context/LanguageContext";
 import "../style/RegisterPage.css";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { toggleTheme } = useContext(ThemeContext);
+  const { language, toggleLanguage } = useContext(LanguageContext);
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -22,7 +29,7 @@ const RegisterPage = () => {
       await axios.post("http://localhost:8080/api/auth/register", form);
       navigate("/login");
     } catch (err) {
-      setError("Registration failed");
+      setError(t("register_error"));
     }
   };
 
@@ -30,8 +37,8 @@ const RegisterPage = () => {
     <div className="register-page">
       <div className="register-container">
         <div className="register-form-section">
-          <h1>Create account</h1>
-          <p className="register-subtitle">Start your learning journey with SkillWay</p>
+          <h1>{t("register_title")}</h1>
+          <p className="register-subtitle">{t("register_subtitle")}</p>
 
           {error && <div className="register-error">{error}</div>}
 
@@ -40,7 +47,7 @@ const RegisterPage = () => {
               <input
                 name="name"
                 type="text"
-                placeholder="Full Name"
+                placeholder={t("register_name")}
                 value={form.name}
                 onChange={handleChange}
                 required
@@ -50,7 +57,7 @@ const RegisterPage = () => {
               <input
                 name="email"
                 type="email"
-                placeholder="Email"
+                placeholder={t("register_email")}
                 value={form.email}
                 onChange={handleChange}
                 required
@@ -60,24 +67,29 @@ const RegisterPage = () => {
               <input
                 name="password"
                 type="password"
-                placeholder="Password"
+                placeholder={t("register_password")}
                 value={form.password}
                 onChange={handleChange}
                 required
               />
             </div>
-            <button type="submit" className="register-button">Register</button>
+            <button type="submit" className="register-button">{t("register_button")}</button>
           </form>
 
           <div className="login-link">
-            Already have an account? <Link to="/login">Login</Link>
+            {t("register_login_text")} <Link to="/login">{t("login")}</Link>
+          </div>
+
+          <div style={{ marginTop: "20px", display: "flex", gap: "12px" }}>
+            <button onClick={toggleTheme}>{t("toggle_theme")}</button>
+            <button onClick={toggleLanguage}>{language === "en" ? "RU" : "EN"}</button>
           </div>
         </div>
 
         <div className="register-visual-section">
           <div className="register-message">
-            <h2>Join SkillWay today</h2>
-            <p>Learn. Grow. Succeed.</p>
+            <h2>{t("register_side_title")}</h2>
+            <p>{t("register_side_desc")}</p>
           </div>
         </div>
       </div>

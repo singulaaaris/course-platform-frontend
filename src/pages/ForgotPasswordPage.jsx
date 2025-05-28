@@ -1,7 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import axios from "axios";
 import "../style/LoginPage.css";
 import { useNavigate } from "react-router-dom";
+import { ThemeContext } from "../context/ThemeContext";
+import { LanguageContext } from "../context/LanguageContext";
+import { useTranslation } from "react-i18next";
 
 const ForgotPasswordPage = () => {
   const [form, setForm] = useState({
@@ -15,6 +18,10 @@ const ForgotPasswordPage = () => {
   const navigate = useNavigate();
 
   const emailRef = useRef();
+
+  const { toggleTheme } = useContext(ThemeContext);
+  const { toggleLanguage } = useContext(LanguageContext);
+  const { t } = useTranslation();
 
   useEffect(() => {
     emailRef.current?.focus();
@@ -36,7 +43,7 @@ const ForgotPasswordPage = () => {
         navigate("/login");
       }, 2000);
     } catch (err) {
-      setError(err.response?.data || "Something went wrong");
+      setError(err.response?.data || t("error_generic"));
     }
   };
 
@@ -44,8 +51,13 @@ const ForgotPasswordPage = () => {
     <div className="login-page">
       <div className="login-container">
         <div className="login-form-section">
-          <h1>Reset Password</h1>
-          <p className="login-subtitle">Enter your email, name, and new password</p>
+          <div className="login-header-controls">
+            <button className="lang-toggle" onClick={toggleLanguage}>{t("language")}</button>
+            <button className="theme-toggle" onClick={toggleTheme}>🌓</button>
+          </div>
+
+          <h1>{t("reset_password_title")}</h1>
+          <p className="login-subtitle">{t("reset_password_desc")}</p>
 
           {message && <div className="login-success">{message}</div>}
           {error && <div className="login-error">{error}</div>}
@@ -56,7 +68,7 @@ const ForgotPasswordPage = () => {
                 ref={emailRef}
                 name="email"
                 type="email"
-                placeholder="Email"
+                placeholder={t("email")}
                 value={form.email}
                 onChange={handleChange}
                 required
@@ -67,7 +79,7 @@ const ForgotPasswordPage = () => {
               <input
                 name="name"
                 type="text"
-                placeholder="Name"
+                placeholder={t("name")}
                 value={form.name}
                 onChange={handleChange}
                 required
@@ -78,22 +90,22 @@ const ForgotPasswordPage = () => {
               <input
                 name="newPassword"
                 type="password"
-                placeholder="New Password"
+                placeholder={t("new_password")}
                 value={form.newPassword}
                 onChange={handleChange}
                 required
               />
             </div>
 
-            <button type="submit" className="login-button">Reset Password</button>
+            <button type="submit" className="login-button">{t("reset_password")}</button>
           </form>
         </div>
 
         <div className="login-visual-section">
           <div className="gradient-overlay"></div>
           <div className="login-message">
-            <h2>Recover access</h2>
-            <p>and get back on track</p>
+            <h2>{t("reset_motivation_title")}</h2>
+            <p>{t("reset_motivation_text")}</p>
           </div>
         </div>
       </div>

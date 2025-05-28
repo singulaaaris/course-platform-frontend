@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import image from "../assets/женщина.png";
 import BestCategories from "../components/BestCategories";
 import FeaturesSection from "../components/FeaturesSection";
@@ -8,6 +9,7 @@ import "../style/HomePage.css";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -15,13 +17,13 @@ const HomePage = () => {
         <div className="home-inner">
           <div className="home-left">
             <h1>
-              Your journey to <span className="highlight">knowledge</span> begins on <span className="brand">Skillway.</span>
+              {t("home_title_part1")} <span className="highlight">{t("home_title_highlight")}</span> {t("home_title_part2")} <span className="brand">Skillway.</span>
             </h1>
             <p>
-              Educational platform and marketplace<br />
-              of online courses
+              {t("home_description_line1")}<br />
+              {t("home_description_line2")}
             </p>
-            <button onClick={() => navigate("/catalog")}>Go to catalog</button>
+            <button onClick={() => navigate("/catalog")}>{t("home_button")}</button>
           </div>
 
           <div className="home-right">
@@ -30,7 +32,6 @@ const HomePage = () => {
         </div>
       </section>
 
-     
       <BestCategories />
       <FeaturesSection />
       <BestCourses />

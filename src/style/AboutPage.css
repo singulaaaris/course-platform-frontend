@@ -1,0 +1,27 @@
+.about-page {
+  padding: 60px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: "M PLUS 1p", sans-serif;
+  color: var(--text-primary);
+}
+
+.about-container {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+.about-container h2 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.about-container p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 16px;
+  color: #444;
+}

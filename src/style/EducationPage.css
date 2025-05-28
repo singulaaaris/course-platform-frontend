@@ -1,0 +1,122 @@
+.edu-wrapper {
+  font-family: "M PLUS 1p", sans-serif;
+  background-color: var(--bg-header);
+  color: var(--text-primary);
+  padding: 40px 20px;
+}
+
+.edu-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.edu-header h1 {
+  font-size: 36px;
+  color: #C4297B;
+  margin-bottom: 10px;
+}
+
+.edu-header p {
+  font-size: 18px;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto 60px;
+}
+
+.edu-card {
+  background-color: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.edu-card:hover {
+  transform: translateY(-6px);
+}
+
+.edu-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+.edu-card h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.edu-card p {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.edu-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #9C2476;
+  text-decoration: none;
+}
+
+.edu-link:hover {
+  text-decoration: underline;
+}
+
+.edu-footer-cta {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #FDF2F8;
+  border-radius: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.edu-footer-cta h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.edu-cta-button {
+  padding: 12px 28px;
+  background-color: #C4297B;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.edu-cta-button:hover {
+  background-color: #a31f67;
+}
+
+/* Dark mode support */
+body.dark .edu-card {
+  background-color: #2c2c2c;
+  color: #f5f5f5;
+}
+
+body.dark .edu-link {
+  color: #ff91ca;
+}
+
+body.dark .edu-footer-cta {
+  background-color: #3a2a35;
+}
+
+body.dark .edu-cta-button {
+  background-color: #ff7ac4;
+}

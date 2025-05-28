@@ -111,3 +111,51 @@ font-family: "M PLUS 1p", sans-serif;
     max-height: 340px;
   }
 }
+:root {
+  --home-bg: white;
+  --home-text: #111;
+  --home-subtext: #555;
+  --home-button-bg: #9C2476;
+  --home-button-text: white;
+  --home-highlight: #C4297B;
+}
+
+body.dark {
+  --home-bg: #1f1f1f;
+  --home-text: #f5f5f5;
+  --home-subtext: #bbbbbb;
+  --home-button-bg: #880d82;
+  --home-button-text: white;
+  --home-highlight: #ff6ab3;
+}
+
+/* Применяем переменные */
+
+.home-wrapper {
+  background-color: var(--home-bg);
+  color: var(--home-text);
+  padding: 80px 20px;
+}
+
+.home-left h1 {
+  color: var(--home-text);
+}
+
+.home-left p {
+  color: var(--home-subtext);
+}
+
+.home-left button {
+  background-color: var(--home-button-bg);
+ 
+}
+
+.home-left button:hover {
+  opacity: 0.9;
+}
+
+.highlight,
+.brand {
+  color: var(--home-highlight);
+}
+

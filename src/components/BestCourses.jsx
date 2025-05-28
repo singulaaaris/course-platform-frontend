@@ -2,17 +2,20 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useTranslation } from "react-i18next";
 import "../style/BestCourses.css";
 
 const BestCourses = () => {
   const [courses, setCourses] = useState([]);
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { t } = useTranslation();
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/courses")
-      .then(res => setCourses(res.data.slice(0, 8)))
-      .catch(err => console.error("Ошибка загрузки курсов", err));
+    axios
+      .get("http://localhost:8080/api/courses")
+      .then((res) => setCourses(res.data.slice(0, 8)))
+      .catch((err) => console.error("Ошибка загрузки курсов", err));
   }, []);
 
   const handleViewMore = () => {
@@ -21,11 +24,11 @@ const BestCourses = () => {
 
   return (
     <section className="best-courses-section">
-      <h2>Skillway Best</h2>
-      <p className="subtitle">A selection of our best courses</p>
+      <h2>{t("best_courses_title")}</h2>
+      <p className="subtitle">{t("best_courses_subtitle")}</p>
 
       <div className="course-grid">
-        {courses.map(course => (
+        {courses.map((course) => (
           <div key={course.id} className="course-card">
             <div className="course-header">
               <img
@@ -36,7 +39,9 @@ const BestCourses = () => {
             </div>
             <div className="course-body">
               <h3>{course.title}</h3>
-              <p className="author">by {course.author.name}</p>
+              <p className="author">
+                {t("by")} {course.author.name}
+              </p>
               <div className="meta">
                 <span>★ {course.averageRating.toFixed(1)}</span>
                 <span>❤️ {course.likesCount}</span>
@@ -48,7 +53,7 @@ const BestCourses = () => {
       </div>
 
       <button className="view-more-btn" onClick={handleViewMore}>
-        View more
+        {t("view_more")}
       </button>
     </section>
   );

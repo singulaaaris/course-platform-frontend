@@ -21,19 +21,36 @@
   color: #C4297B;
 }
 
-.footer-links {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.footer-links a {
-  text-decoration: none;
+.footer-links button {
+  background: none;
+  border: none;
   color: #3B3B3B;
-  transition: color 0.2s ease;
   font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  transition: color 0.2s ease;
+  font-size: 15px;
+padding-right: 20px;
+font-family: "M PLUS 1p", sans-serif;
+font-weight: 600px;
 }
 
-.footer-links a:hover {
+.footer-links button:hover {
+  color: #C4297B;
+}
+
+body.dark .footer {
+  background-color: #1f1f1f;
+  color: #f5f5f5;
+  border-top: 1px solid #333;
+}
+
+body.dark .footer-links a {
+  color: #dddddd;
+}
+
+body.dark .footer-links a:hover {
   color: #C4297B;
 }

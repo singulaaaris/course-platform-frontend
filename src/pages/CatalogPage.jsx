@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import {
   fetchCourses,
   selectCourses,
@@ -8,7 +9,7 @@ import {
   setSearch,
   setCategory,
   setSort,
-  setPage
+  setPage,
 } from "../redux/slices/coursesSlice";
 import "../style/CatalogPage.css";
 
@@ -17,6 +18,7 @@ const CatalogPage = () => {
   const courses = useSelector(selectCourses);
   const totalPages = useSelector(selectTotalPages);
   const { search, category, sort, page } = useSelector((state) => state.courses);
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(fetchCourses());
@@ -43,7 +45,6 @@ const CatalogPage = () => {
     }
   };
 
-
   const visibleCourses = useMemo(() => {
     if (sort === "likes") {
       return [...courses].sort((a, b) => b.likesCount - a.likesCount);
@@ -53,18 +54,18 @@ const CatalogPage = () => {
 
   return (
     <div className="catalog-page">
-      <h2>All Courses</h2>
+      <h2>{t("catalog_title", "All Courses")}</h2>
 
       <div className="controls">
         <input
           type="text"
-          placeholder="Search courses..."
+          placeholder={t("catalog_search_placeholder", "Search courses...")}
           value={search}
           onChange={handleSearch}
         />
 
         <select value={category} onChange={handleCategoryChange}>
-          <option value="all">All Categories</option>
+          <option value="all">{t("all_categories", "All Categories")}</option>
           <option value="Development">Development</option>
           <option value="Programming">Programming</option>
           <option value="Python">Python</option>
@@ -79,9 +80,9 @@ const CatalogPage = () => {
         </select>
 
         <select value={sort} onChange={handleSortChange}>
-          <option value="title">Sort by Title</option>
-          <option value="id">Newest First</option>
-          <option value="likes">Sort by Likes</option>
+          <option value="title">{t("sort_title", "Sort by Title")}</option>
+          <option value="id">{t("sort_newest", "Newest First")}</option>
+          <option value="likes">{t("sort_likes", "Sort by Likes")}</option>
         </select>
       </div>
 
@@ -91,27 +92,27 @@ const CatalogPage = () => {
             <div key={course.id} className="course-card">
               <img src={course.imageUrl} alt={course.title} />
               <div className="course-info">
-                <h3>{course.title}</h3>
-                <p>{course.description}</p>
+                <h3>{t(`course_${course.id}_title`, course.title)}</h3>
+                <p>{t(`course_${course.id}_desc`, course.description)}</p>
                 <div className="course-stats">
                   <span>★ {course.averageRating.toFixed(1)}</span>
                   <span>❤️ {course.likesCount}</span>
                   <span>💬 {course.commentsCount}</span>
                 </div>
                 <Link to={`/catalog/${course.id}`} className="view-course-button">
-                  View Course
+                  {t("view_course", "View Course")}
                 </Link>
               </div>
             </div>
           ))
         ) : (
-          <p>No courses found.</p>
+          <p>{t("no_courses", "No courses found.")}</p>
         )}
       </div>
 
       <div className="pagination">
         <button onClick={() => changePage(page - 1)} disabled={page === 0}>
-          Previous
+          {t("previous", "Previous")}
         </button>
 
         {[...Array(totalPages).keys()].map((num) => (
@@ -125,7 +126,7 @@ const CatalogPage = () => {
         ))}
 
         <button onClick={() => changePage(page + 1)} disabled={page === totalPages - 1}>
-          Next
+          {t("next", "Next")}
         </button>
       </div>
     </div>

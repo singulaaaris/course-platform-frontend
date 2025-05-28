@@ -1,9 +1,29 @@
+:root {
+  --courses-bg: #ffffff;
+  --courses-text: #111;
+  --courses-subtext: #555;
+  --courses-card-bg: #ffffff;
+  --courses-btn-bg: #000;
+  --courses-btn-text: #fff;
+}
+
+body.dark {
+  --courses-bg: #1f1f1f;
+  --courses-text: #f5f5f5;
+  --courses-subtext: #bbbbbb;
+  --courses-card-bg: #292828;
+  --courses-btn-bg: #f5f5f5;
+  --courses-btn-text: #000;
+}
+
 .best-courses-section {
-  background-color: white;
+  background-color: var(--courses-bg);
+  color: var(--courses-text);
   padding: 80px 20px;
   font-family: "M PLUS 1p", sans-serif;
   max-width: 1200px;
   margin: 0 auto;
+  
 }
 
 .best-courses-section h2 {
@@ -14,7 +34,7 @@
 
 .subtitle {
   font-size: 17px;
-  color: #555;
+  color: var(--courses-subtext);
   margin-bottom: 30px;
 }
 
@@ -25,10 +45,11 @@
 }
 
 .course-card {
-  background: #fefefe;
+  background-color: var(--courses-card-bg);
+  color: var(--courses-text);
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease;
   display: flex;
   flex-direction: column;
@@ -49,30 +70,31 @@
 }
 
 .course-body h3 {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   margin-bottom: 6px;
+  color: var(--courses-text);
 }
 
 .course-body .author {
   font-size: 14px;
-  color: #666;
-  margin-bottom: 10px;
+  color: var(--courses-subtext);
+  margin-bottom: 12px;
 }
 
 .meta {
-  font-size: 13px;
-  color: #777;
   display: flex;
-  justify-content: space-between;
   gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--courses-subtext);
 }
 
 .view-more-btn {
   margin: 40px auto 0;
   display: block;
-  background: #C4297B;
-  color: white;
+  background-color: var(--courses-btn-bg);
+  color: var(--courses-btn-text);
   padding: 12px 28px;
   border-radius: 30px;
   font-size: 15px;
@@ -85,3 +107,13 @@
 .view-more-btn:hover {
   opacity: 0.9;
 }
+body.dark .course-card {
+  background-color: #292828 !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark .course-body .author,
+body.dark .meta {
+  color: #bbbbbb !important;
+}
+

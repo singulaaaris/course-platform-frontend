@@ -132,3 +132,56 @@
 .view-course-button:hover {
   background-color: #9C2476;
 }
+
+body.dark .catalog-page {
+  background-color: #1f1f1f;
+  color: #f1f1f1;
+}
+
+body.dark .controls input,
+body.dark .controls select {
+  background-color: #2b2b2b;
+  color: #f1f1f1;
+  border: 1px solid #555;
+}
+
+body.dark .controls input:focus,
+body.dark .controls select:focus {
+  background-color: #333;
+  border-color: #C4297B;
+}
+
+body.dark .course-card {
+  background-color: #2c2c2c;
+  border: 1px solid #444;
+  box-shadow: none;
+}
+
+body.dark .course-info h3 {
+  color: #f1f1f1;
+}
+
+body.dark .course-info p {
+  color: #ccc;
+}
+
+body.dark .course-info span {
+  color: #aaa;
+}
+
+body.dark .pagination span {
+  color: #ccc;
+}
+
+body.dark .pagination button:disabled {
+  background-color: #555;
+}
+
+body.dark .view-course-button {
+  background-color: #C4297B;
+  color: #fff;
+}
+
+body.dark .view-course-button:hover {
+  background-color: #9C2476;
+}

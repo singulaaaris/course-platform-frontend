@@ -14,7 +14,11 @@ import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import AdminPanel from "./pages/AdminPanel";
 import NotFoundPage from "./pages/NotFoundPage";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage"; 
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
+import EducationPage from "./pages/EducationPage";
+
 
 const App = () => {
   const { user } = useAuth();
@@ -23,7 +27,6 @@ const App = () => {
 
   const hideLayoutRoutes = ["/login", "/register", "/forgot-password"];
   const hideLayout = hideLayoutRoutes.includes(location.pathname);
-
   const isAdmin = user?.role === "ADMIN";
 
   return (
@@ -34,6 +37,9 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/catalog" element={<CatalogPage />} />
         <Route path="/catalog/:id" element={<CoursePage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/education" element={<EducationPage />} />
+        
 
         <Route
           path="/login"
@@ -45,7 +51,6 @@ const App = () => {
             )
           }
         />
-
         <Route
           path="/register"
           element={
@@ -56,19 +61,15 @@ const App = () => {
             )
           }
         />
-
         <Route
           path="/dashboard"
           element={user ? <DashboardPage /> : <Navigate to="/login" />}
         />
-
         <Route
           path="/admin"
           element={isAdmin ? <AdminPanel /> : <Navigate to="/" />}
         />
-
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 

@@ -51,11 +51,12 @@
   font-family: "M PLUS 1p", sans-serif;
 }
 
-.theme-toggle {
-  width: 20px;
-  height: 20px;
-  background-color: #C4297B;
-  border-radius: 50%;
+.lang-toggle {
+  background: none;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
   cursor: pointer;
 }
 
@@ -73,4 +74,51 @@
 
 .login-btn:hover {
   opacity: 0.9;
+}
+
+:root {
+  --bg-header: #FFFEFC;
+  --text-primary: #333;
+  --btn-login: #9C2476;
+  --btn-theme: #C4297B;
+}
+
+body.dark {
+  --bg-header: #292828;
+  --text-primary: #f5f5f5;
+  --btn-login: #880d82;
+  --btn-theme: #911961;
+}
+
+.header {
+  background-color: var(--bg-header);
+  padding: 16px 0;
+  color: var(--text-primary);
+  border-bottom: none;
+}
+
+.nav-links a {
+  color: var(--text-primary);
+}
+
+.login-btn {
+  background-color: var(--btn-login);
+  color: white;
+}
+
+.theme-toggle {
+  background-color: var(--btn-theme);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+body.dark .nav-links a,
+body.dark .language {
+  color: #f5f5f5;
+}
+
+body.dark .nav-links a:hover,
+body.dark .language:hover {
+  color: #C4297B;
 }
